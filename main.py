@@ -1,3 +1,7 @@
+#! /usr/bin/env python
+# -*- coding: utf-8 -*-
+
+
 # 8.12.20 3hour
 # 15.12.20 4hour
 import settings 
