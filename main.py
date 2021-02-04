@@ -237,8 +237,7 @@ def callback_query(call):
 GPIO.setmode(GPIO.BCM)
 
 GPIO.setup(BUTTON_GPIO, GPIO.IN)
-GPIO.add_event_detect(BUTTON_GPIO, GPIO.RISING, 
-        callback=checkUpdate, bouncetime=50)
+GPIO.add_event_detect(BUTTON_GPIO, GPIO.RISING, callback=checkUpdate, bouncetime=50)
 
 # Thread(target=checkUpdate, args=()).start()
 
