@@ -34,66 +34,66 @@ status = {
     'HangarLighting': off,
 }
 
-def checkUpdate(event):
-    bot.send_message(chat_id = 441494356, text = 'Обнаружено движение', parse_mode='HTML')
+# def checkUpdate(event):
+#     bot.send_message(chat_id = 441494356, text = 'Обнаружено движение', parse_mode='HTML')
 
-class Sensor(ABC):
-    def __init__(self, pinIn, isInner):
-        self.pinIn = pinIn
-        self.isInner = isInner
+# class Sensor(ABC):
+#     def __init__(self, pinIn, isInner):
+#         self.pinIn = pinIn
+#         self.isInner = isInner
 
-        self.blink = 0 
+#         self.blink = 0 
         
-        # gpio.setmode(gpio.BCM)
-        # gpio.stup(pin, gpio.IN)
+#         # gpio.setmode(gpio.BCM)
+#         # gpio.stup(pin, gpio.IN)
     
 
 
-class ExternalArea(Sensor):
-    state = False
+# class ExternalArea(Sensor):
+#     state = False
 
 
-class CleanArea(Sensor):
-    state = False
+# class CleanArea(Sensor):
+#     state = False
 
 
-    t3 = datetime.now() 
+#     t3 = datetime.now() 
 
-    def __init__(self, pinIn, isInner):
-        super().__init__(pinIn, isInner)
-        self.maximumFalses = 100000
-        self.time_sensitive = 1.5
-        self.warningRathing = 0 
+#     def __init__(self, pinIn, isInner):
+#         super().__init__(pinIn, isInner)
+#         self.maximumFalses = 100000
+#         self.time_sensitive = 1.5
+#         self.warningRathing = 0 
 
-    def handler(self):
+#     def handler(self):
 
-        if self.state :    #  and gpio.input(pinIn)
-            self.blink+=1
+#         if self.state :    #  and gpio.input(pinIn)
+#             self.blink+=1
 
-            if (datetime.now() - self.t3).seconds < self.time_sensitive and self.blink > self.maximumFalses:
-                self.warningRathing +=1 
-                print('aaaa')
-                logging.info('Обнаружен блинк  движения с порогом ' + str(self.maximumFalses)+", с пина "+ str(self.pinIn))
+#             if (datetime.now() - self.t3).seconds < self.time_sensitive and self.blink > self.maximumFalses:
+#                 self.warningRathing +=1 
+#                 print('aaaa')
+#                 logging.info('Обнаружен блинк  движения с порогом ' + str(self.maximumFalses)+", с пина "+ str(self.pinIn))
 
-            # обнутелние таймера если за время T не замечено движений выше порого фильтрации
-            if (datetime.now() - self.t3).seconds >= self.time_sensitive:
-                self.t3 = datetime.now() 
-                self.blink = 0
+#             # обнутелние таймера если за время T не замечено движений выше порого фильтрации
+#             if (datetime.now() - self.t3).seconds >= self.time_sensitive:
+#                 self.t3 = datetime.now() 
+#                 self.blink = 0
         
 
 
-    def calibration(self):
-        calibration_cycles = 5
-        self.maximumFalses = 0
+#     def calibration(self):
+#         calibration_cycles = 5
+#         self.maximumFalses = 0
 
-        for i in range(1, calibration_cycles):
-            t3 = datetime.now()
+#         for i in range(1, calibration_cycles):
+#             t3 = datetime.now()
 
-            while (datetime.now() - t3).seconds < self.time_sensitive:        
-                self.handler()
-                if self.blink > self.maximumFalses: self.maximumFalses = self.blink
-            self.blink = 0
-        logging.info ("Калибровка датчика на пине "+ str(self.pinIn) +" завершена. Число ложных сигналов:  "+str(self.blink))
+#             while (datetime.now() - t3).seconds < self.time_sensitive:        
+#                 self.handler()
+#                 if self.blink > self.maximumFalses: self.maximumFalses = self.blink
+#             self.blink = 0
+#         logging.info ("Калибровка датчика на пине "+ str(self.pinIn) +" завершена. Число ложных сигналов:  "+str(self.blink))
             
 
 
@@ -234,11 +234,11 @@ def callback_query(call):
 
 
 
-GPIO.setmode(GPIO.BCM)
+# GPIO.setmode(GPIO.BCM)
 
-GPIO.setup(BUTTON_GPIO, GPIO.IN)
-GPIO.add_event_detect(BUTTON_GPIO, GPIO.RISING, 
-        callback=checkUpdate, bouncetime=50)
+# GPIO.setup(BUTTON_GPIO, GPIO.IN)
+# GPIO.add_event_detect(BUTTON_GPIO, GPIO.RISING, 
+#         callback=checkUpdate, bouncetime=50)
 
 # Thread(target=checkUpdate, args=()).start()
 
