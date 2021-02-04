@@ -34,7 +34,7 @@ status = {
     'HangarLighting': off,
 }
 
-def checkUpdate():
+def checkUpdate(event):
     bot.send_message(chat_id = 441494356, text = 'Обнаружено движение', parse_mode='HTML')
 
 class Sensor(ABC):
