@@ -13,8 +13,6 @@ import RPi.GPIO as GPIO
 
 BUTTON_GPIO = 4
 
-# import RPi.GPIO as gpio
-
 
 
 logging.basicConfig(level=logging.DEBUG, filename='myapp.log', format='%(asctime)s %(levelname)s:%(message)s')
@@ -236,19 +234,16 @@ def callback_query(call):
 
 
 
+GPIO.setmode(GPIO.BCM)
 
-if __name__ == '__main__':
-    GPIO.setmode(GPIO.BCM)
-    
-    GPIO.setup(BUTTON_GPIO, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-    GPIO.setup(LED_GPIO, GPIO.OUT)   
-    GPIO.add_event_detect(BUTTON_GPIO, GPIO.RISING, 
-            callback=checkUpdate, bouncetime=50)
-    
-    # Thread(target=checkUpdate, args=()).start()
+GPIO.setup(BUTTON_GPIO, GPIO.IN)
+GPIO.add_event_detect(BUTTON_GPIO, GPIO.RISING, 
+        callback=checkUpdate, bouncetime=50)
 
-    while True:
-        try:
-            bot.polling(none_stop=True)
-        except Exception as E:
-            time.sleep(1)
+# Thread(target=checkUpdate, args=()).start()
+
+while True:
+    try:
+        bot.polling(none_stop=True)
+    except Exception as E:
+        time.sleep(1)
