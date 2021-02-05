@@ -249,7 +249,7 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setup(BUTTON_GPIO, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 GPIO.add_event_detect(BUTTON_GPIO, GPIO.RISING, callback=checkUpdate, bouncetime=50)
 
-Thread(target=xxx, args=()).start()
+# Thread(target=xxx, args=()).start()
 
 while True:
     try:
