@@ -13,7 +13,7 @@ import RPi.GPIO as GPIO
 
 BUTTON_GPIO = 4
 global x
-global y = False
+global y
 
 
 logging.basicConfig(level=logging.DEBUG, filename='myapp.log', format='%(asctime)s %(levelname)s:%(message)s')
@@ -37,12 +37,14 @@ status = {
 
 def checkUpdate(event):
     global x
+    global y
     x = datetime.now()
     bot.send_message(chat_id = 441494356, text = 'Обнаружено движение', parse_mode='HTML')
     y = True
 
 
 def xxx():
+    global x 
     global y
     if (GPIO.input(BUTTON_GPIO) == 0) and y:
         text = x - datetime.now()
