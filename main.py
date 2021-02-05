@@ -42,7 +42,7 @@ def checkUpdate(event):
     while GPIO.input(BUTTON_GPIO) == 1:
         print('1')
 
-    text = timet - datetime.now()
+    text = (datetime.now() - timet).microseconds
     bot.send_message(chat_id = 441494356, text = str(text), parse_mode='HTML')
 
 
