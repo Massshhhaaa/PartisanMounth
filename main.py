@@ -12,7 +12,8 @@ import logging
 import RPi.GPIO as GPIO
 
 BUTTON_GPIO = 4
-
+global x
+global y = false
 
 
 logging.basicConfig(level=logging.DEBUG, filename='myapp.log', format='%(asctime)s %(levelname)s:%(message)s')
@@ -35,7 +36,18 @@ status = {
 }
 
 def checkUpdate(event):
+    x = datetime.now()
     bot.send_message(chat_id = 441494356, text = 'Обнаружено движение', parse_mode='HTML')
+    y = True
+
+
+def xxx():
+    if GPIO.input(BUTTON_GPIO) == 0 and y:
+        text = x - datetime.now()
+        bot.send_message(chat_id = 441494356, text, parse_mode='HTML')
+        y = False
+
+
 
 # class Sensor(ABC):
 #     def __init__(self, pinIn, isInner):
@@ -239,7 +251,7 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setup(BUTTON_GPIO, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 GPIO.add_event_detect(BUTTON_GPIO, GPIO.RISING, callback=checkUpdate, bouncetime=50)
 
-# Thread(target=checkUpdate, args=()).start()
+Thread(target=xxx, args=()).start()
 
 while True:
     try:
