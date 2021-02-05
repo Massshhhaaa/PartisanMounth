@@ -12,8 +12,6 @@ import logging
 import RPi.GPIO as GPIO
 
 BUTTON_GPIO = 4
-global Xiss
-global Yellow
 
 
 logging.basicConfig(level=logging.DEBUG, filename='myapp.log', format='%(asctime)s %(levelname)s:%(message)s')
@@ -36,20 +34,16 @@ status = {
 }
 
 def checkUpdate(event):
-    global Xiss
-    global Yellow
-    Xiss = datetime.now()
+
+    timet = datetime.now()
     bot.send_message(chat_id = 441494356, text = 'Обнаружено движение', parse_mode='HTML')
-    Yellow = True
 
 
-def xxx():
-    global Yellow
-    if (GPIO.input(BUTTON_GPIO) == 0) and Yellow:
-        text = Xiss - datetime.now()
-        print('ohnmhn')
-        bot.send_message(chat_id = 441494356, text = str(text) , parse_mode='HTML')
-        Yellow = False
+    while GPIO.input(BUTTON_GPIO) == 1:
+        print('1')
+
+    text = timet - datetime.now()
+    bot.send_message(chat_id = 441494356, text = str(text), parse_mode='HTML')
 
 
 
