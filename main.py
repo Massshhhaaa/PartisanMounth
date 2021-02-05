@@ -13,7 +13,7 @@ import RPi.GPIO as GPIO
 
 BUTTON_GPIO = 4
 global x
-global y = false
+global y = False
 
 
 logging.basicConfig(level=logging.DEBUG, filename='myapp.log', format='%(asctime)s %(levelname)s:%(message)s')
