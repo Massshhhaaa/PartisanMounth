@@ -36,16 +36,12 @@ status = {
 }
 
 def checkUpdate(event):
-    global x
-    global y
     x = datetime.now()
     bot.send_message(chat_id = 441494356, text = 'Обнаружено движение', parse_mode='HTML')
     y = True
 
 
 def xxx():
-    global x 
-    global y
     if (GPIO.input(BUTTON_GPIO) == 0) and y:
         text = x - datetime.now()
         print('ohnmhn')
